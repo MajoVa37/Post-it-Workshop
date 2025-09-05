@@ -10,6 +10,9 @@ function createNoteElement(text, colorClass) {
     noteDiv.classList.add('note', colorClass); 
     noteDiv.textContent = text;
 
+    /**
+     * Es el boton que permite eliminar una nota
+     */
     const deleteButton = document.createElement('span');
     deleteButton.classList.add('delete-btn');
     deleteButton.textContent = 'x';
@@ -18,6 +21,7 @@ function createNoteElement(text, colorClass) {
     return noteDiv;
 }
 
+//**Esta funcion permite guardar los post-it */
 function saveNotes() {
     const notes = [];
     document.querySelectorAll('.note').forEach(note => {
@@ -31,6 +35,7 @@ function saveNotes() {
     localStorage.setItem('notes', JSON.stringify(notes));
 }
 
+//**Esta funcion permite cargar los post-it */
 function loadNotes() {
     notesContainer.innerHTML = '';
     const storedNotes = localStorage.getItem('notes');
@@ -42,7 +47,7 @@ function loadNotes() {
         });
     }
 }
-
+//**Esta funcion permite establecer el modo del landing (claro u oscuro) */
 function setInitialTheme() {
     const isDarkMode = localStorage.getItem('isDarkMode') === 'true';
     if (isDarkMode) {
@@ -51,10 +56,12 @@ function setInitialTheme() {
     }
 }
 
+//**Estos son los que permiten la interaccion con los post-it */
 noteInput.addEventListener('input', () => {
     addButton.disabled = noteInput.value.trim() === '';
 });
 
+//**Este es el boton que permite cambiar el modo del landing (claro u oscuro) */
 toggleThemeButton.addEventListener('click', () => {
     body.classList.toggle('dark-mode');
     const isDarkMode = body.classList.contains('dark-mode');
@@ -62,6 +69,7 @@ toggleThemeButton.addEventListener('click', () => {
     toggleThemeButton.textContent = isDarkMode ? 'Modo Claro' : 'Modo Oscuro';
 });
 
+//**Este permite editar los post-it */
 notesContainer.addEventListener('dblclick', (event) => {
     const target = event.target;
     if (target.classList.contains('note')) {
@@ -69,16 +77,19 @@ notesContainer.addEventListener('dblclick', (event) => {
         target.textContent = '';
         target.classList.add('editing');
 
+//**Este es el que permite editar el post-it */
         const textarea = document.createElement('textarea');
         textarea.value = currentText;
         target.appendChild(textarea);
         textarea.focus();
 
+//**Esta funcion permite guardar la edicion del post-it */
         function saveEdit() {
             const newText = textarea.value.trim();
             target.textContent = newText;
             target.classList.remove('editing');
-            
+
+//**Este es el boton que permite eliminar el post-it */
             const deleteButton = document.createElement('span');
             deleteButton.classList.add('delete-btn');
             deleteButton.textContent = 'x';
@@ -86,6 +97,8 @@ notesContainer.addEventListener('dblclick', (event) => {
 
             saveNotes();
         }
+
+//**Estos son los que permiten guardar la edicion del post-it */
         textarea.addEventListener('blur', saveEdit);
         textarea.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
@@ -96,6 +109,7 @@ notesContainer.addEventListener('dblclick', (event) => {
     }
 });
 
+//**Este es el boton que permite añadir un nuevo post-it */
 addButton.addEventListener('click', () => {
     const noteText = noteInput.value.trim();
     if (noteText !== '') {
@@ -108,6 +122,7 @@ addButton.addEventListener('click', () => {
     }
 });
 
+//**Este es el boton que permite eliminar un post-it */
 notesContainer.addEventListener('click', (event) => {
     if (event.target.classList.contains('delete-btn')) {
         event.target.parentElement.remove();
@@ -115,12 +130,14 @@ notesContainer.addEventListener('click', (event) => {
     }
 });
 
+//**Estos son los que permiten dar un efecto hover a los post-it */
 notesContainer.addEventListener('mouseover', (event) => {
     if (event.target.classList.contains('note')) {
         event.target.style.boxShadow = '0 0 15px rgba(0,0,0,0.3)';
     }
 });
 
+//**Estos son los que permiten quitar el efecto hover a los post-it */
 notesContainer.addEventListener('mouseout', (event) => {
     if (event.target.classList.contains('note')) {
         event.target.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';

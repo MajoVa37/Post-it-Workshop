@@ -14,7 +14,7 @@ body {
     margin: 40px auto; 
     background: white; 
     padding: 32px 28px 28px 28px; 
-    border-radius: 1px; 
+    border-radius: 8px; 
     box-shadow: 0 4px 24px rgba(0,0,0,0.12); 
     position: relative; 
     transition: background-color 0.5s; 
@@ -63,7 +63,7 @@ body {
 }
 .note { 
     padding: 18px; 
-    border-radius: 18px; 
+    border-radius: 10px; 
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
     position: relative; 
     width: 150px; 
@@ -87,8 +87,8 @@ body {
 .note-yellow { background-color: #fff9c4; }
 .note-blue { background-color: #bbdefb; }
 .note-pink { background-color: #ffcdd2; }
-.note-green { background-color: #c8e6c9; } /**añadido por mi */
-.note-purple { background-color: #e1bee7; }/**añadido por mi */
+/**.note-green { background-color: #c8e6c9; } estos son añadidos por mi */
+/**.note-purple { background-color: #e1bee7; }estos son añadidos por mi */
 .note.editing {
     padding: 0;
 }
